@@ -1,0 +1,15 @@
+### IDE ###
+.idea
+
+### Python ###
+__pycache__/
+
+### ENV ###
+.env
+
+### VENV ###
+venv
+
+### Other ###
+help.txt
+tmp/

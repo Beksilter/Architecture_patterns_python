@@ -1,0 +1,1 @@
+To start application from uwsgi use "run.py"
