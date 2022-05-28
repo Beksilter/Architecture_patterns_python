@@ -15,8 +15,8 @@ class Framework:
         self.fronts_lst = fronts_obj
 
     def __call__(self, environ, start_response):
-        # получаем адрес, по которому выполнен переход в браузере
 
+        # получаем адрес, по которому выполнен переход в браузере
         path = environ['PATH_INFO']
 
         # добавление закрывающего слеша
@@ -25,6 +25,7 @@ class Framework:
 
         # обрабатыаем запросы
         request = {}
+
         # Получаем все данные запроса
         method = environ['REQUEST_METHOD']
         request['method'] = method
@@ -33,22 +34,20 @@ class Framework:
             data = PostRequests().get_request_params(environ)
             request['data'] = Framework.decode_value(data)
             print(f'Нам пришёл post-запрос: {Framework.decode_value(data)}')
+            print(f'Печатаем {data}')
         if method == 'GET':
             request_params = GetRequests().get_request_params(environ)
             request['request_params'] = Framework.decode_value(request_params)
-            print(f'Нам пришли GET-параметры:'
-                  f' {Framework.decode_value(request_params)}')
+            print(f'Нам пришли GET-параметры: {Framework.decode_value(request_params)}')
 
         # находим нужный контролер
         # отработка патерна PC
-
         if path in self.routes_lst:
             view = self.routes_lst[path]
         else:
             view = PageNotFound404()
-        request = {}
 
-        # наполняем словарь request элементами
+        # наполняем словарь requuest элементами
         # этот словарь получат все контролеры
         # отработка патерна FC
         for front in self.fronts_lst:
